@@ -1,18 +1,18 @@
 import Std.HTTP
 
-def getCurrencyPrice crypto fiat:
+«51»def getCurrencyPrice crypto fiat:
     «40»uri = "https://min-api.cryptocompare.com/data/price"
-    «41»get1 = Http.get uri
-    «42»setParam1 = get1 . setParam "fsym" (Just crypto)
-    «43»setParam2 = setParam1 . setParam "tsyms" (Just fiat)
-    «44»toText1 = setParam2 . perform . body . toText
-    «45»parse1 = JSON.parse toText1
-    «46»lookupReal1 = parse1 . lookupReal fiat
-    lookupReal1
+    «41»request = Http.get uri
+    «42»withFsym = request . setParam "fsym" (Just crypto)
+    «43»withTsyms = withFsym . setParam "tsyms" (Just fiat)
+    «44»response = withTsyms . perform . json
+    «46»price = response . getReal fiat
+    price
 
-def main:
+«52»def main:
     «47»fiat = "USD"
     «48»crypto = "BTC"
-    «50»every1 = every 500.miliseconds (getCurrencyPrice crypto fiat)
+    «50»prices = every 1.seconds (getCurrencyPrice crypto fiat)
     None
-### META {"metas":[{"marker":47,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":3872}}}},{"marker":48,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":208,"_vector2_x":3872}}}},{"marker":50,"meta":{"_displayResult":true,"_selectedVisualizer":["echarts: plot","echarts/plot.html"],"_position":{"fromPosition":{"_vector2_y":128,"_vector2_x":4208}}}},{"marker":40,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":0}}}},{"marker":41,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":176}}}},{"marker":42,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":352}}}},{"marker":43,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":528}}}},{"marker":44,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":672}}}},{"marker":45,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":880}}}},{"marker":46,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":1056}}}}]}
+
+### META {"metas":[{"marker":47,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":3872}}}},{"marker":48,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":208,"_vector2_x":3872}}}},{"marker":50,"meta":{"_displayResult":true,"_selectedVisualizer":["echarts: plot","echarts/plot.html"],"_position":{"fromPosition":{"_vector2_y":128,"_vector2_x":4208}}}},{"marker":40,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":0}}}},{"marker":41,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":176}}}},{"marker":42,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":352}}}},{"marker":43,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":528}}}},{"marker":44,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":672}}}},{"marker":46,"meta":{"_displayResult":false,"_selectedVisualizer":["base: json","base/json/json.html"],"_position":{"fromPosition":{"_vector2_y":0,"_vector2_x":1056}}}}]}
