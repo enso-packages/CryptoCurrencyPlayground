@@ -1,6 +1,7 @@
 modulesSettings:
   src/Mod.luna:
     typeRepToVisMap: []
+    currentBreadcrumb: main
     breadcrumbsSettings:
     - - items: []
       - breadcrumbCameraSettings:
@@ -24,6 +25,7 @@ modulesSettings:
             - []
       - - ! 'echarts: plot'
         - echarts/plot.html
+    currentBreadcrumb: main
     breadcrumbsSettings:
     - - items: []
       - breadcrumbCameraSettings:
