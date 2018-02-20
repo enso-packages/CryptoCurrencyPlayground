@@ -1,4 +1,5 @@
 import Std.HTTP
+import Std.Time
 
 «51»def getCurrencyPrice crypto fiat:
     «40»uri = "https://min-api.cryptocompare.com/data/price"
